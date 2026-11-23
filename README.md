@@ -119,11 +119,8 @@ sequenceDiagram
   * `ElectricVehicle`: Prioritizes designated stalls with EV charging conduits.
   * `HandicapVehicle`: Restricted routing to Ground-Level priority accessibility bays.
   * `VIPVehicle`: Channeled to premium, high-convenience executive reserved stalls.
-* **Greedy Nearest-Spot Spatial Allocator:** Evaluates all vacant spots satisfying the vehicle's specific accessibility criteria and assigns the spot minimizing entry-gate Manhattan displacement:
-
-  $$
-  d_{\text{Manhattan}}(\text{Gate}, \text{Spot}) = |r_{\text{spot}} - r_{\text{gate}}| + |c_{\text{spot}} - c_{\text{gate}}|
-  $$
+* **Greedy Nearest-Spot Spatial Allocator:** Evaluates all vacant spots satisfying the vehicle's specific accessibility criteria and assigns the spot minimizing entry-gate Manhattan displacement:  
+  $$d_{\text{Manhattan}}(\text{Gate}, \text{Spot}) = |r_{\text{spot}} - r_{\text{gate}}| + |c_{\text{spot}} - c_{\text{gate}}|$$
 
 * **Digital Ticket Generation:** Issues an immutable `ParkingTicket` stamped with a unique alphanumeric identifier, vehicle metadata, designated spot coordinates, and entry timestamps.
 
