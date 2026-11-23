@@ -40,7 +40,7 @@
 
 ## 🏢 Executive Summary & Project Vision
 
-Urban centers and smart infrastructure environments face severe logistical bottlenecks due to inefficient spatial parking allocation, manual ticketing latency, lack of visibility into multi-floor occupancy, and clumsy valet storage logistics. 
+Urban centers and smart infrastructure environments face severe logistical bottlenecks due to inefficient spatial parking allocation, manual ticketing latency, lack of visibility into multi-floor occupancy, and clumsy valet storage logistics.
 
 Developed under the auspices of the **Samsung Innovation Campus (SIC 8)** capstone initiative, **ParkFlow** is an enterprise-grade, software-driven Smart Parking Management System that reconciles hardware-inspired Industrial IoT (IIoT) telemetry with advanced computational intelligence.
 
@@ -112,9 +112,7 @@ sequenceDiagram
 **Engineering Domain:** *Vehicle Telemetry, Regex Parsing, Class Specialization & Spatial Heuristics*  
 **Key Deliverables:** `modules/arrival.py`, `models/vehicle.py`, `models/ticket.py`, `algorithms/allocation.py`
 
-* **License Plate Validation:** Enforces strict alphanumeric patterns supporting both Egyptian standardized plates and international formats using compiled regular expressions:
-  $$\text{Pattern} = \texttt{\textasciicircum[A-Z0-9\textbackslash u0600-\textbackslash u06FF\textbackslash s-]\{3,10\}\$}$$
-  Rejects malformed, empty, or anomalous strings through a dedicated `InvalidPlateException`.
+* **License Plate Validation:** Enforces strict alphanumeric patterns supporting both Egyptian standardized plates and international formats using compiled regular expressions: `^[A-Z0-9\u0600-\u06FF\s-]{3,10}$`. Rejects malformed, empty, or anomalous strings through a dedicated `InvalidPlateException`.
 * **Polymorphic Vehicle Modeling:** Implements an extensible domain hierarchy:
   * `Vehicle` *(Base Class)*: Enforces common attributes (`plate`, `vehicle_type`, entry timestamp).
   * `RegularVehicle`: Standard combustion and family vehicles routed to public stalls.
@@ -122,7 +120,11 @@ sequenceDiagram
   * `HandicapVehicle`: Restricted routing to Ground-Level priority accessibility bays.
   * `VIPVehicle`: Channeled to premium, high-convenience executive reserved stalls.
 * **Greedy Nearest-Spot Spatial Allocator:** Evaluates all vacant spots satisfying the vehicle's specific accessibility criteria and assigns the spot minimizing entry-gate Manhattan displacement:
-  $$d_{\text{Manhattan}}(\text{Gate}, \text{Spot}) = |r_{\text{spot}} - r_{\text{gate}}| + |c_{\text{spot}} - c_{\text{gate}}|$$
+
+  $$
+  d_{\text{Manhattan}}(\text{Gate}, \text{Spot}) = |r_{\text{spot}} - r_{\text{gate}}| + |c_{\text{spot}} - c_{\text{gate}}|
+  $$
+
 * **Digital Ticket Generation:** Issues an immutable `ParkingTicket` stamped with a unique alphanumeric identifier, vehicle metadata, designated spot coordinates, and entry timestamps.
 
 ---
@@ -170,7 +172,7 @@ sequenceDiagram
 **Key Deliverables:** `modules/member4_admin.py`, `data/analytics_engine.py`, `data/generate_dataset.py`, `algorithms/sorting.py`, `algorithms/searching.py`, `algorithms/stack_ds.py`
 
 * **Executive Business Intelligence Dashboard:** Extracts actionable commercial insights from 1,000+ real-world Industrial IoT parking records:
-  * Real-Time Occupancy Rate ($\%$) and Current Capacity Utilization.
+  * Real-Time Occupancy Rate (%) and Current Capacity Utilization.
   * Gross Financial Turnover & Net Revenue Breakdown (excluding VAT).
   * Peak Rush-Hour Congestion Heatmaps and Diurnal Arrival Patterns.
   * Vehicle Type Market Share and Mean Dwell Time Distribution.
@@ -180,7 +182,7 @@ sequenceDiagram
   * Reconciles exit timestamps predating entry times.
   * Generates an automated Data Quality Health Report detailing dropped, imputed, and sanitized records.
 * **Empirical Algorithm Benchmark Lab:** Provides an interactive comparative performance laboratory executing manual algorithmic implementations against live data arrays:
-  * **Merge Sort vs. In-Place Quick Sort:** Profiles execution time ($\text{ms}$), recursive call depth, comparison tallies, and element swaps across arbitrary numerical and categorical features (`fee_paid`, `duration_hours`, `entry_time`).
+  * **Merge Sort vs. In-Place Quick Sort:** Profiles execution time (ms), recursive call depth, comparison tallies, and element swaps across arbitrary numerical and categorical features (`fee_paid`, `duration_hours`, `entry_time`).
   * **Binary Search vs. Sequential Search:** Visualizes logarithmic $O(\log n)$ efficiency gains over linear $O(n)$ traversals on sorted datasets, reporting exact comparison counts.
 * **Data Structure Inspection Suite:**
   * **Audit Logging Stack (`AuditStack`):** Tracks administrative events with full LIFO chronological inspection and an interactive "Undo" operation.
@@ -194,14 +196,14 @@ In strict compliance with Samsung Innovation Campus foundational standards, Park
 
 | Component | Class / Function | Underlying Principle | Time Complexity (Best / Avg / Worst) | Space Complexity | Industrial Role |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Custom Hash Table** | `HashTable` | Polynomial rolling hash with separate chaining | $O(1)~/~O(1)~/~O(n)$ | $O(n)$ | Instant ticket and plate retrieval without linear overhead |
-| **Valet Lane Stack** | `Stack` | Bounded Array LIFO with capacity limits | $O(1)~/~O(1)~/~O(1)$ | $O(C)$ | Managing physical single-file double-parked vehicles |
-| **Dual-Stack Shuffle** | `retrieve_car` | Auxiliary LIFO stack transfer & restore | $O(k)~/~O(k)~/~O(k)$ | $O(k)$ | Non-destructive extraction of trapped valet cars |
-| **Audit Log Stack** | `AuditStack` | Unbounded dynamic LIFO stack | $O(1)~/~O(1)~/~O(1)$ | $O(n)$ | Transaction tracking and administrative undo actions |
-| **Greedy Allocator** | `find_nearest_spot` | Spatial distance minimization | $O(R \cdot C)~/~O(R \cdot C)~/~O(R \cdot C)$ | $O(1)$ | Assigning optimal open stall closest to gate |
-| **Merge Sort** | `merge_sort` | Divide-and-conquer stable sorting | $O(n \log n)~/~O(n \log n)~/~O(n \log n)$ | $O(n)$ | High-precision financial and dwell time ordering |
-| **Quick Sort** | `quick_sort` | In-place partitioning with pivot | $O(n \log n)~/~O(n \log n)~/~O(n^2)$ | $O(\log n)$ | Memory-efficient administrative data sorting |
-| **Binary Search** | `binary_search` | Logarithmic interval bisection | $O(1)~/~O(\log n)~/~O(\log n)$ | $O(1)$ | Rapid tariff and timestamp verification |
+| **Custom Hash Table** | `HashTable` | Polynomial rolling hash with separate chaining | $O(1)$ / $O(1)$ / $O(n)$ | $O(n)$ | Instant ticket and plate retrieval without linear overhead |
+| **Valet Lane Stack** | `Stack` | Bounded Array LIFO with capacity limits | $O(1)$ / $O(1)$ / $O(1)$ | $O(C)$ | Managing physical single-file double-parked vehicles |
+| **Dual-Stack Shuffle** | `retrieve_car` | Auxiliary LIFO stack transfer & restore | $O(k)$ / $O(k)$ / $O(k)$ | $O(k)$ | Non-destructive extraction of trapped valet cars |
+| **Audit Log Stack** | `AuditStack` | Unbounded dynamic LIFO stack | $O(1)$ / $O(1)$ / $O(1)$ | $O(n)$ | Transaction tracking and administrative undo actions |
+| **Greedy Allocator** | `find_nearest_spot` | Spatial distance minimization | $O(R \cdot C)$ / $O(R \cdot C)$ / $O(R \cdot C)$ | $O(1)$ | Assigning optimal open stall closest to gate |
+| **Merge Sort** | `merge_sort` | Divide-and-conquer stable sorting | $O(n \log n)$ / $O(n \log n)$ / $O(n \log n)$ | $O(n)$ | High-precision financial and dwell time ordering |
+| **Quick Sort** | `quick_sort` | In-place partitioning with pivot | $O(n \log n)$ / $O(n \log n)$ / $O(n^2)$ | $O(\log n)$ | Memory-efficient administrative data sorting |
+| **Binary Search** | `binary_search` | Logarithmic interval bisection | $O(1)$ / $O(\log n)$ / $O(\log n)$ | $O(1)$ | Rapid tariff and timestamp verification |
 
 ---
 
@@ -209,33 +211,68 @@ In strict compliance with Samsung Innovation Campus foundational standards, Park
 
 ### 1. Spatial Manhattan Distance Minimization
 To minimize transit time within the facility, the allocation heuristic calculates the rectilinear distance from the Ingress Gate $(0, 0)$ to any candidate vacant stall $(r, c)$:
-$$d_{\text{Manhattan}} = |r - r_{\text{gate}}| + |c - c_{\text{gate}}|$$
+
+$$
+d_{\text{Manhattan}} = |r - r_{\text{gate}}| + |c - c_{\text{gate}}|
+$$
+
 Subject to:
-$$\text{Type}(\text{Spot}_{r,c}) \equiv \text{Compatibility}(\text{Vehicle}_{\text{class}})$$
+
+$$
+\text{Type}(\text{Spot}_{r,c}) \equiv \text{Compatibility}(\text{Vehicle}_{\text{class}})
+$$
 
 ### 2. Dynamic Tariff & VAT Billing Equation
 For any completed session with entry timestamp $t_{\text{in}}$ and exit timestamp $t_{\text{out}}$:
-$$\Delta t = t_{\text{out}} - t_{\text{in}} \quad (\text{expressed in hours})$$
 
-$$\text{Billable Hours } (H) = \begin{cases} 
+$$
+\Delta t = t_{\text{out}} - t_{\text{in}} \quad (\text{expressed in hours})
+$$
+
+$$
+\text{Billable Hours } (H) = \begin{cases}
 0, & \text{if } \Delta t \le \frac{10}{60} \\
 \min\left(\lceil \Delta t \rceil, 8\right), & \text{if } \Delta t > \frac{10}{60}
-\end{cases}$$
+\end{cases}
+$$
 
 The dynamic base subtotal accounts for rush-hour peak multipliers:
-$$\text{Subtotal} = \sum_{h=1}^{H} \left( \text{Rate}(\text{Vehicle}) \times M_{\text{peak}}(h) \right)$$
+
+$$
+\text{Subtotal} = \sum_{h=1}^{H} \left( \text{Rate}(\text{Vehicle}) \times M_{\text{peak}}(h) \right)
+$$
+
 Where:
-$$M_{\text{peak}}(h) = \begin{cases} 1.5, & \text{if hour } h \text{ begins in } \{7, 8, 9, 16, 17, 18\} \\ 1.0, & \text{otherwise} \end{cases}$$
+
+$$
+M_{\text{peak}}(h) = \begin{cases}
+1.5, & \text{if hour } h \text{ begins in } \{7, 8, 9, 16, 17, 18\} \\
+1.0, & \text{otherwise}
+\end{cases}
+$$
 
 Final customer invoice incorporating Egyptian fiscal regulations:
-$$\text{VAT} = \text{Subtotal} \times 0.14$$
-$$\text{Total Invoice Payable} = \text{Subtotal} + \text{VAT} = \text{Subtotal} \times 1.14$$
+
+$$
+\text{VAT} = \text{Subtotal} \times 0.14
+$$
+
+$$
+\text{Total Invoice Payable} = \text{Subtotal} + \text{VAT} = \text{Subtotal} \times 1.14
+$$
 
 ### 3. Hash Table Polynomial Dispersion
 To minimize hash collisions across variable-length alphanumeric license plates, the hash index computes:
-$$\mathcal{H}(S) = \left( \sum_{i=0}^{L-1} S[i] \cdot 31^{L-1-i} \right) \pmod M$$
+
+$$
+\mathcal{H}(S) = \left( \sum_{i=0}^{L-1} S[i] \cdot 31^{L-1-i} \right) \pmod M
+$$
+
 Dynamic resizing occurs whenever the load factor exceeds the threshold:
-$$\alpha = \frac{N}{M} > 0.75 \implies M_{\text{new}} = 2 \times M_{\text{old}}$$
+
+$$
+\alpha = \frac{N}{M} > 0.75 \implies M_{\text{new}} = 2 \times M_{\text{old}}
+$$
 
 ---
 
@@ -325,7 +362,7 @@ Project_File/
 ### 1. Repository Initialization
 Clone or extract the project workspace to your local filesystem:
 ```bash
-git clone https://github.com/your-repo/parkflow-smart-parking.git
+git clone https://github.com/Retr00010000/Final-Project-SIC.git
 cd Project_File/Main
 ```
 
