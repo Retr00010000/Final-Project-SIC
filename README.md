@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🅿️ ParkFlow: Intelligent Multi-Tier Smart Parking Management System
+# ParkFlow: Intelligent Multi-Tier Smart Parking Management System
 ### *An Industrial IoT-Driven Spatial Allocation, Algorithmic Valet Orchestration, and Business Intelligence Platform*
 
 **Samsung Innovation Campus (SIC) — Coding & Programming Track (Cohort 8)**  
@@ -38,7 +38,7 @@
 
 ---
 
-## 🏢 Executive Summary & Project Vision
+## Executive Summary & Project Vision
 
 Urban centers and smart infrastructure environments face severe logistical bottlenecks due to inefficient spatial parking allocation, manual ticketing latency, lack of visibility into multi-floor occupancy, and clumsy valet storage logistics.
 
@@ -53,7 +53,7 @@ Rather than relying on black-box external utilities, ParkFlow implements foundat
 
 ---
 
-## 👥 Engineering Division & Core Team Leadership
+## Engineering Division & Core Team Leadership
 
 The platform was architected and delivered through a distributed, highly decoupled engineering model. Each team member held full end-to-end responsibility for their designated domain, from theoretical algorithmic design down to UI rendering and edge-case handling.
 
@@ -106,7 +106,7 @@ sequenceDiagram
 
 ---
 
-## 🔍 Modular Technical Deep Dive
+## Modular Technical Deep Dive
 
 ### Tab 1: Ingress Telemetry & Greedy Spot Allocation (Omar Sultan)
 **Engineering Domain:** *Vehicle Telemetry, Regex Parsing, Class Specialization & Spatial Heuristics*  
@@ -187,7 +187,7 @@ sequenceDiagram
 
 ---
 
-## ⚡ Handcrafted Data Structures & Algorithmic Rigor
+## Handcrafted Data Structures & Algorithmic Rigor
 
 In strict compliance with Samsung Innovation Campus foundational standards, ParkFlow avoids standard library black-box shortcuts (`dict`, `sort()`, `queue`) in core logic, crafting custom classes from first principles:
 
@@ -204,7 +204,7 @@ In strict compliance with Samsung Innovation Campus foundational standards, Park
 
 ---
 
-## 📐 Mathematical Formulations & Business Logic
+## Mathematical Formulations & Business Logic
 
 ### 1. Spatial Manhattan Distance Minimization
 To minimize transit time within the facility, the allocation heuristic calculates the rectilinear distance from the Ingress Gate $(0, 0)$ to any candidate vacant stall $(r, c)$:
@@ -349,7 +349,7 @@ Project_File/
 
 ---
 
-## 🚀 Installation & Deployment Guide
+## Installation & Deployment Guide
 
 ### Prerequisites
 * **Operating System:** Cross-platform (Windows 10/11, macOS, Ubuntu / Linux)
@@ -393,7 +393,7 @@ http://localhost:8501
 
 ---
 
-## 🧪 Quality Assurance & Automated Test Suite
+## Quality Assurance & Automated Test Suite
 
 The integrity of ParkFlow's fiscal engine, stack mechanics, and pricing boundaries is continuously asserted through automated unit testing.
 
@@ -416,7 +416,7 @@ pytest tests/testbilling.py -v
 
 ---
 
-## 🎓 Academic Acknowledgments & Citation
+## Academic Acknowledgments & Citation
 
 This capstone project was conceptualized, designed, and defended as part of the **Samsung Innovation Campus (SIC) — Coding & Programming Track (Cohort 8)**.
 
